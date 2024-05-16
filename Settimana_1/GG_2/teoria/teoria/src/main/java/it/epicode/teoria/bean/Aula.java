@@ -17,15 +17,16 @@ public class Aula {
 
     @Autowired  //inietta la lista degli studenti prendendoli direttamente dal contesto
     private List<Studente> studenti;
-
+//
 //    @Autowired  // inietto gli studenti che sono nel context nella lista del costruttore
 //    public Aula(List<Studente> studenti) {
 //        this.studenti = studenti;
 //    }
 
-
+//
 //    @Autowired
 //    public void setStudenti(List<Studente> studenti) {
 //        this.studenti = studenti;
 //    }
+
 }

@@ -14,8 +14,7 @@ import java.util.List;
 @Configuration  // mettendo questo facciamo capire che questa contiene Beans
 public class AppConfig {
     // fondamentale scrivere Bean così Spring capisce
-    //@Bean("Carlo")
-    @Bean
+    @Bean("Carmelo")
     @Primary    // significa: "se ci sono due bean ritornami questo che ha Primary
     //@Scope("prototype")  // cosi posso creare un modello che funge da prototipo e mi permette di creare oggetti diversi da questo
     public Studente getStudente(@Value("${studente1.nome}") String nome,@Value("${studente1.cognome}") String cognome){

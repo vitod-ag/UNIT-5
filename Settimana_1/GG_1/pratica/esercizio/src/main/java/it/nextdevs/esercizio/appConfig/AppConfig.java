@@ -1,16 +1,16 @@
 package it.nextdevs.esercizio.appConfig;
 
-import it.nextdevs.esercizio.bean.Drink;
-import it.nextdevs.esercizio.bean.Menu;
-import it.nextdevs.esercizio.bean.Pizza;
-import it.nextdevs.esercizio.bean.Topping;
+import it.nextdevs.esercizio.bean.*;
+import it.nextdevs.esercizio.enumerations.StatoTavolo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class AppConfig {
 
 
@@ -144,7 +144,7 @@ public class AppConfig {
         return salami;
     }
 
-    @Bean
+    //@Bean
     public Menu menu () {
         Menu menu = new Menu();
 
@@ -171,6 +171,36 @@ public class AppConfig {
         menu.setPizze(pizze);
 
         return menu;
+    }
+
+    @Bean("tavolo1")
+    public Tavolo tavolo1(@Value("${tavolo1.coperto}")Double coperto) {
+        Tavolo tavolo = new Tavolo();
+        tavolo.setNumero(1);
+        tavolo.setNumeroClientiMax(15);
+        tavolo.setStato(StatoTavolo.OCCUPATO);
+        tavolo.setCostoCoperto(coperto);
+        return tavolo;
+    }
+
+    @Bean("tavolo2")
+    public Tavolo tavolo2(@Value("${tavolo2.coperto}")Double coperto) {
+        Tavolo tavolo = new Tavolo();
+        tavolo.setNumero(1);
+        tavolo.setNumeroClientiMax(7);
+        tavolo.setStato(StatoTavolo.OCCUPATO);
+        tavolo.setCostoCoperto(coperto);
+        return tavolo;
+    }
+
+    @Bean("tavolo3")
+    public Tavolo tavolo3(@Value("${tavolo3.coperto}")Double coperto) {
+        Tavolo tavolo = new Tavolo();
+        tavolo.setNumero(1);
+        tavolo.setNumeroClientiMax(4);
+        tavolo.setStato(StatoTavolo.OCCUPATO);
+        tavolo.setCostoCoperto(coperto);
+        return tavolo;
     }
 }
 

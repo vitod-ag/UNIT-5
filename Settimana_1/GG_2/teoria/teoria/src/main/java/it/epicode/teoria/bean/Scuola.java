@@ -13,4 +13,20 @@ public class Scuola {
     @Autowired
     @Qualifier("aula1")
     private Aula aula;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Aula getAula() {
+        return aula;
+    }
+
+    public void setAula(Aula aula) {
+        this.aula = aula;
+    }
 }
