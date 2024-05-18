@@ -15,6 +15,14 @@ public class PrenotazioneService {
 
     public void inserisciPrenotazione(Prenotazione prenotazione) {
 
+        // Verifico se la prenotazione è duplicata
+        List<Prenotazione> prenotazioniDuplicate = prenotazioneRepository.findByPostazioneAndUtenteAndDataPrenotazione(
+                prenotazione.getPostazione(), prenotazione.getUtente(), prenotazione.getDataPrenotazione());
+
+        if (!prenotazioniDuplicate.isEmpty()) {
+            throw new IllegalArgumentException("Errore: La prenotazione è duplicata");
+        }
+
         // Verifico se l'utente ha già una prenotazione per questa data
         List<Prenotazione> prenotazioniUtentiData = prenotazioneRepository.findByUtenteAndData(prenotazione.getUtente(), prenotazione.getDataPrenotazione());
         if (!prenotazioniUtentiData.isEmpty()) {
@@ -23,7 +31,7 @@ public class PrenotazioneService {
 
         // Verifico se la postazione è già prenotata per questa data
         List<Prenotazione> prenotazioniPostazioniData = prenotazioneRepository.findByPostazioneAndData(prenotazione.getPostazione(), prenotazione.getDataPrenotazione());
-        if(!prenotazioniPostazioniData.isEmpty()) {
+        if (!prenotazioniPostazioniData.isEmpty()) {
             throw new IllegalArgumentException("La postazione è già prenotata per questa data");
         }
 

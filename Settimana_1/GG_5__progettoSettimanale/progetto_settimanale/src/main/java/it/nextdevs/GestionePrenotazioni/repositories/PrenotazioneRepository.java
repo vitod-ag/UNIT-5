@@ -12,8 +12,11 @@ import java.util.List;
 public interface PrenotazioneRepository extends JpaRepository <Prenotazione, Integer> {
 
     @Query("SELECT p FROM Prenotazione p WHERE p.utente = :utente AND p.dataPrenotazione = :dataPrenotazione")
-    List<Prenotazione> findByUtenteAndData(Utente utente, LocalDate dataPrenotazione);
+    public List<Prenotazione> findByUtenteAndData(Utente utente, LocalDate dataPrenotazione);
 
     @Query("SELECT p FROM Prenotazione p WHERE p.postazione = :postazione AND p.dataPrenotazione = :dataPrenotazione")
-    List<Prenotazione> findByPostazioneAndData(Postazione postazione, LocalDate dataPrenotazione);
+    public List<Prenotazione> findByPostazioneAndData(Postazione postazione, LocalDate dataPrenotazione);
+
+    @Query("SELECT p FROM Prenotazione p WHERE p.postazione = :postazione AND p.utente = :utente AND p.dataPrenotazione = :dataPrenotazione")
+    List<Prenotazione> findByPostazioneAndUtenteAndDataPrenotazione(Postazione postazione, Utente utente, LocalDate dataPrenotazione);
 }
