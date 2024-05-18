@@ -15,25 +15,27 @@ public class PrenotazioneService {
 
     public void inserisciPrenotazione(Prenotazione prenotazione) {
 
-        // verifiche se un utente può avere più prenotazioni in corso,
-        // ma non può prenotare più di una postazione per una particolare data.
+        // Verifico se l'utente ha già una prenotazione per questa data
         List<Prenotazione> prenotazioniUtentiData = prenotazioneRepository.findByUtenteAndData(prenotazione.getUtente(), prenotazione.getDataPrenotazione());
         if (!prenotazioniUtentiData.isEmpty()) {
-            throw new IllegalArgumentException("L'utente ha già prenotata per questa data");
+            throw new IllegalArgumentException("L'utente ha già una prenotazione per questa data");
         }
 
+        // Verifico se la postazione è già prenotata per questa data
         List<Prenotazione> prenotazioniPostazioniData = prenotazioneRepository.findByPostazioneAndData(prenotazione.getPostazione(), prenotazione.getDataPrenotazione());
-        if(!prenotazioniUtentiData.isEmpty()) {
+        if(!prenotazioniPostazioniData.isEmpty()) {
             throw new IllegalArgumentException("La postazione è già prenotata per questa data");
         }
 
+        // Verifico se la postazione ha raggiunto il numero massimo di partecipanti
         Integer numeroMaxPartecipanti = prenotazione.getPostazione().getNumeroMaxPartecipanti();
         if (numeroMaxPartecipanti != null) {
-            Integer partecipantiAttuali = prenotazioniUtentiData.size();
-            if (partecipantiAttuali >= numeroMaxPartecipanti.intValue()) {
-                throw new IllegalArgumentException("La postazione ha raggiunto il numero massimo dei partecipanti consentiti");
+            Integer partecipantiAttuali = prenotazioniPostazioniData.size();
+            if (partecipantiAttuali >= numeroMaxPartecipanti) {
+                throw new IllegalArgumentException("La postazione ha raggiunto il numero massimo di partecipanti consentiti");
             }
         }
+
         prenotazioneRepository.save(prenotazione);
     }
 
@@ -48,5 +50,4 @@ public class PrenotazioneService {
     public void cancellaPrenotazione(int id) {
         prenotazioneRepository.deleteById(Math.toIntExact(id));
     }
-
 }

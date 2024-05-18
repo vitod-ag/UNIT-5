@@ -49,17 +49,28 @@ public class MyCommandLineRunner implements CommandLineRunner {
         postazioneService.inserisciPostazione(postazione1);
 
         // creo una prenotazione nel DB
+        Prenotazione prenotazione1 = null;
         try {
-            Prenotazione prenotazione1 = ctx.getBean("prenotazione1", Prenotazione.class);
+            prenotazione1 = ctx.getBean("prenotazione1", Prenotazione.class);
             prenotazioneService.inserisciPrenotazione(prenotazione1);
             System.out.println("Prenotazione effettuata");
-        } catch (Exception e) {
-            System.err.println("Errore" + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Errore: " + e.getMessage());
         }
 
+        Prenotazione prenotazioneDuplicata = new Prenotazione();
+        prenotazioneDuplicata.setPostazione(postazione1);
+        prenotazioneDuplicata.setUtente(utente1);
+        prenotazioneDuplicata.setDataPrenotazione(prenotazione1.getDataPrenotazione());
+        try {
+            prenotazioneService.inserisciPrenotazione(prenotazioneDuplicata);
+            System.out.println("Seconda prenotazione effettuata");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Errore: " + e.getMessage());
+        }
 
         List<Postazione> postazioni = postazioneService.getPostazioniByTipoAndCitta(TipoPostazione.PRIVATO, "Roma");
-        System.out.println("Postazioni trovate: ");
+        System.out.println("\nQUERY -> Postazioni trovate: ");
         for(Postazione postazione: postazioni) {
             System.out.println(postazione);
         }
