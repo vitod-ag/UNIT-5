@@ -1,4 +1,4 @@
-package it.nextdevs.esercizio;
+package it.nextdevs.blogging;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
