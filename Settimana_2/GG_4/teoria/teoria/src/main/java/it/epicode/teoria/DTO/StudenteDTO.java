@@ -1,4 +1,4 @@
-package it.nextdevs.esercizio.DTO;
+package it.epicode.teoria.DTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -8,15 +8,19 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class AutoreDTO {
-    @NotNull(message = "Il nome è obbligatorio")
-    @Size(max = 50)
+public class StudenteDTO {
+
+    @NotNull
+    @Size(max = 30)
     private String nome;
-    @NotNull(message = "Il cognome è obbligatorio")
-    @Size(max = 50)
+    @NotNull
+    @Size(max = 30)
     private String cognome;
-    @Email
+    private LocalDate dataNascita;
+    @Email()
     @NotNull
     private String email;
-    private LocalDate dataNascita;
+    @NotNull
+    private int aulaId;
+
 }

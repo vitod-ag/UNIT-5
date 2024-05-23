@@ -1,6 +1,7 @@
 package it.nextdevs.esercizio.service;
 
 
+import com.cloudinary.Cloudinary;
 import it.nextdevs.esercizio.DTO.BlogDTO;
 import it.nextdevs.esercizio.exception.AutoreNonTrovatoException;
 import it.nextdevs.esercizio.exception.BlogNonTrovatoException;
@@ -14,8 +15,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -25,6 +29,9 @@ public class BlogService {
 
     @Autowired
     private AutoreRepository autoreRepository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     //********************************
     public Optional<Blog> getBlogById(int id) {
@@ -37,6 +44,7 @@ public class BlogService {
         blog.setCategoria(blogDTO.getCategoria());
         blog.setContenuto(blogDTO.getContenuto());
         blog.setTempoDiLettura(blogDTO.getTempoDiLettura());
+        blog.setCover("https://picsum.photos/200/300");
         blogRepository.save(blog);
 
         Optional<Autore> autoreOptional = autoreRepository.findById(blogDTO.getAutoreId());
@@ -78,6 +86,21 @@ public class BlogService {
             return "Blog con l'id " + id + "eliminato";
         }else  {
             throw new BlogNonTrovatoException("Blog con l'id " + id + "non trovato");
+        }
+    }
+
+    public String patchCoverBlog(int id, MultipartFile foto) throws IOException {
+        Optional<Blog> blogOptional = getBlogById(id);
+
+        if ( blogOptional.isPresent() ) {
+            String url = (String) cloudinary.uploader().upload(foto.getBytes(), Collections.emptyMap()).get("url");
+            Blog blog = blogOptional.get();
+            blog.setCover(url);
+            blogRepository.save(blog);
+
+            return "Blog con id " + id + " aggiornata con successo con la cover inviata";
+        }else{
+            throw new BlogNonTrovatoException("Blog con id: " + id + " non trovato");
         }
     }
 }

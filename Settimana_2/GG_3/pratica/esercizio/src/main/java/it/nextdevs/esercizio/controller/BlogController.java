@@ -1,13 +1,18 @@
 package it.nextdevs.esercizio.controller;
 
 import it.nextdevs.esercizio.DTO.BlogDTO;
+import it.nextdevs.esercizio.exception.BadRequestException;
 import it.nextdevs.esercizio.exception.BlogNonTrovatoException;
 import it.nextdevs.esercizio.model.Blog;
 import it.nextdevs.esercizio.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -16,7 +21,12 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/api/blogs")
-    public String saveBlog(@RequestBody BlogDTO blogDTO) {
+    public String saveBlog(@RequestBody @Validated BlogDTO blogDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(bindingResult.getAllErrors()
+                    .stream().map(objectError -> objectError.getDefaultMessage())
+                    .reduce("",((s,s2)-> s+s2)));
+        }
         return blogService.saveBlog(blogDTO);
     }
 
@@ -38,12 +48,22 @@ public class BlogController {
     }
 
     @PutMapping("/api/blogs/{id}")
-    public Blog updateBlog(@PathVariable int id,@RequestBody BlogDTO blogDTO) throws BlogNonTrovatoException {
+    public Blog updateBlog(@PathVariable int id,@RequestBody @Validated BlogDTO blogDTO, BindingResult bindingResult) throws BlogNonTrovatoException {
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(bindingResult.getAllErrors()
+                    .stream().map(objectError -> objectError.getDefaultMessage())
+                    .reduce("",((s,s2)-> s+s2)));
+        }
         return blogService.updateBlog(id, blogDTO);
     }
 
     @DeleteMapping("/api/blogs/{id}")
     public String deleteBlog(@PathVariable int id) throws BlogNonTrovatoException {
         return blogService.deleteBlog(id);
+    }
+
+    @PatchMapping("/api/blogs/{id}")
+    public String patchCoverBlog(@RequestBody MultipartFile foto, @PathVariable int id) throws IOException {
+        return blogService.patchCoverBlog(id, foto);
     }
 }
