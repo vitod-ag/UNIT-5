@@ -1,6 +1,5 @@
 package it.nextdevs.gestioneDispositivi.service;
 
-import it.nextdevs.gestioneDispositivi.DTO.DipendenteDTO;
 import it.nextdevs.gestioneDispositivi.DTO.DispositivoDTO;
 import it.nextdevs.gestioneDispositivi.enums.Status;
 import it.nextdevs.gestioneDispositivi.exception.DipendenteNonTrovatoException;
@@ -32,25 +31,30 @@ public class DispositivoService {
 
     public String saveDispositivo(DispositivoDTO dispositivoDTO) {
         Dispositivo dispositivo = switch (dispositivoDTO.getTipoDispositivo()) {
+            case "laptop" -> new Laptop();
             case "smartphone" -> new Smartphone();
             case "tablet" -> new Tablet();
-            case "laptop" -> new Laptop();
-            default -> throw new IllegalArgumentException("Tipologia non valida");
+            default -> throw new IllegalArgumentException("Tipo di dispositivo non supportato");
         };
-        dispositivo.setNome_modello(dispositivoDTO.getNome_modello());
+
+        dispositivo.setTipoDispositivo(dispositivoDTO.getTipoDispositivo());
+        dispositivo.setNomeModello(dispositivoDTO.getNomeModello());
         dispositivo.setMarca(dispositivoDTO.getMarca());
         dispositivo.setStato(dispositivoDTO.getStato());
 
-        Optional<Dipendente> dipendenteOptional = dipendenteRepository.findById(dispositivoDTO.getDipendente_id());
-        if (dipendenteOptional.isPresent()) {
-            Dipendente dipendente = dipendenteOptional.get();
+        Optional<Dipendente> dipendenteOpt = dipendenteRepository.findById(dispositivoDTO.getDipendenteId());
+        if (dipendenteOpt.isPresent()) {
+            Dipendente dipendente = dipendenteOpt.get();
             dispositivo.setDipendente(dipendente);
         } else {
-            throw new DipendenteNonTrovatoException("Dipendente con l'id " + dispositivoDTO.getDipendente_id() + " non trovato");
+            throw new DipendenteNonTrovatoException("Dipendente con id " + dispositivoDTO.getDipendenteId() + " non trovato");
         }
+
         dispositivoRepository.save(dispositivo);
-        return "Dispositivo con id " + dispositivo.getId() + " salvato";
+        return "Dispositivo " + dispositivo.getId() + " salvato con successo";
+
     }
+
 
     public Page<Dispositivo> getAllDispositivo(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -63,18 +67,18 @@ public class DispositivoService {
         Optional<Dispositivo> dispositivoOptional = getDispositivoById(id);
         if (dispositivoOptional.isPresent()) {
             Dispositivo dispositivo = dispositivoOptional.get();
-            dispositivo.setNome_modello(dispositivoDTO.getNome_modello());
+            dispositivo.setNomeModello(dispositivoDTO.getNomeModello());
             dispositivo.setMarca(dispositivoDTO.getMarca());
             dispositivo.setStato(dispositivoDTO.getStato());
 
-            Optional<Dipendente> dipendenteOptional = dipendenteRepository.findById(dispositivoDTO.getDipendente_id());
+            Optional<Dipendente> dipendenteOptional = dipendenteRepository.findById(dispositivoDTO.getDipendenteId());
             if (dipendenteOptional.isPresent()) {
                 Dipendente dipendente = dipendenteOptional.get();
                 dispositivo.setDipendente(dipendente);
                 dispositivoRepository.save(dispositivo);
                 return dispositivo;
             } else {
-                throw new DipendenteNonTrovatoException("Dipendente con l'id " + dispositivoDTO.getDipendente_id() + " non trovato");
+                throw new DipendenteNonTrovatoException("Dipendente con l'id " + dispositivoDTO.getDipendenteId() + " non trovato");
             }
         }else {
             throw new DispositivoNonTrovatoException("Dispositivo con l'id " + id + " non esiste");

@@ -83,7 +83,7 @@ public class DipendenteService {
             dipendente.setFoto(url);
             dipendenteRepository.save(dipendente);
 
-            return "dipendente con id " + id + " aggiornata con successo con la foto inviata";
+            return "Dipendente con id " + id + " aggiornata con successo con la foto inviata";
         }else{
             throw new DipendenteNonTrovatoException("dipendente con id: " + id + " non trovato");
         }

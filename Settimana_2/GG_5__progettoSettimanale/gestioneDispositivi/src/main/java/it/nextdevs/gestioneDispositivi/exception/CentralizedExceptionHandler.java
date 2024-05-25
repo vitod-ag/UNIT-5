@@ -16,9 +16,9 @@ public class CentralizedExceptionHandler extends ResponseEntityExceptionHandler 
         Error error = new Error();
         error.setMessage(e.getMessage());
         error.setDataErrore(LocalDateTime.now());
-        error.setStatoErrore(HttpStatus.BAD_REQUEST);
+        error.setStatoErrore(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DispositivoNonTrovatoException.class)
@@ -26,9 +26,9 @@ public class CentralizedExceptionHandler extends ResponseEntityExceptionHandler 
         Error error = new Error();
         error.setMessage(e.getMessage());
         error.setDataErrore(LocalDateTime.now());
-        error.setStatoErrore(HttpStatus.BAD_REQUEST);
+        error.setStatoErrore(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 

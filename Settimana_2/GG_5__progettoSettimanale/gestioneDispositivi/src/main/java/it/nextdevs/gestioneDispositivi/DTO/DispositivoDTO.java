@@ -1,23 +1,20 @@
 package it.nextdevs.gestioneDispositivi.DTO;
 
 import it.nextdevs.gestioneDispositivi.enums.Status;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class DispositivoDTO {
-    @NotNull(message = "Il nome/modello è obbligatorio")
-    @Size(max = 30)
-    private String nome_modello;
-    @NotNull(message = "La marca è obbligatoria")
-    @Size(max = 30)
+    @NotBlank(message = "Il nome/modello è obbligatorio")
+    private String nomeModello;
+    @NotBlank(message = "La marca è obbligatoria")
     private String marca;
     @NotNull(message = "Lo stato è obbligatorio")
     private Status stato;
+    @NotNull
     private String tipoDispositivo;
 
-    private int dipendente_id;
+    private int dipendenteId;
 }

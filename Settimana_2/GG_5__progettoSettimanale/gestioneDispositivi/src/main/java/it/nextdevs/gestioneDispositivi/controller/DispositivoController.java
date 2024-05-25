@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@RestController
 public class DispositivoController {
     @Autowired
     private DispositivoService dispositivoService;
@@ -62,16 +63,21 @@ public class DispositivoController {
     }
 
     @DeleteMapping("/api/dispositivi/{id}")
-    public String deleteBlog(@PathVariable int id) throws DispositivoNonTrovatoException {
+    public String deleteDispositivo(@PathVariable int id) throws DispositivoNonTrovatoException {
         return dispositivoService.deleteDispositivo(id);
     }
 
-    @PostMapping("/{dispositivoId}/assegna/{id}")
-    public ResponseEntity<Dispositivo> assignDispositivo(@PathVariable Integer dispositivoId, @PathVariable Integer id) {
-        Optional<Dipendente> dipendenteOpt = dipendenteService.getDipendentiById(id);
+    @PostMapping("/api/dispositivi/{dispositivoId}/assegna/{dipendenteId}")
+    public ResponseEntity<Dispositivo> assegnaIlDispositivoAlDipendente(@PathVariable int dispositivoId, @PathVariable int dipendenteId) {
+        Optional<Dipendente> dipendenteOpt = dipendenteService.getDipendentiById(dipendenteId);
         if (dipendenteOpt.isPresent()) {
-            Dispositivo dispositivo = dispositivoService.assegnaDispositivoAlDipendente(dispositivoId, dipendenteOpt.get());
-            return new ResponseEntity<>(dispositivo, HttpStatus.OK);
+            Dipendente dipendente = dipendenteOpt.get();
+            try {
+                Dispositivo dispositivo = dispositivoService.assegnaDispositivoAlDipendente(dispositivoId, dipendente);
+                return new ResponseEntity<>(dispositivo, HttpStatus.OK);
+            } catch (DispositivoNonTrovatoException e) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
