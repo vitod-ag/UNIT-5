@@ -1,4 +1,4 @@
-package catenaDiResponsabilita;
+package COMPORTAMENTALI.catenaDiResponsabilita;
 
 public abstract class Erogatore {
     private Erogatore erogatoreSuccessivo;

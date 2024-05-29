@@ -1,4 +1,4 @@
-package catenaDiResponsabilita;
+package COMPORTAMENTALI.catenaDiResponsabilita;
 
 public class Erogatore200 extends Erogatore{
     public Erogatore200() {

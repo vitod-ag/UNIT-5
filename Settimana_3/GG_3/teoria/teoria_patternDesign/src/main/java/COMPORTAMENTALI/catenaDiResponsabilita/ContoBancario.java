@@ -1,4 +1,4 @@
-package catenaDiResponsabilita;
+package COMPORTAMENTALI.catenaDiResponsabilita;
 
 public class ContoBancario {
     private int numeroConto;
