@@ -1,5 +1,6 @@
-package it.epicode.teoria.entity;
+package it.nextdevs.GestioneDispositivi.model;
 
+import it.nextdevs.GestioneDispositivi.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,16 +12,24 @@ import java.util.List;
 
 @Data
 @Entity
-public class User implements UserDetails {
+public class Dipendente implements UserDetails {
     @Id
     @GeneratedValue
-    private int id;
-    private String name;
-    private String surname;
+    private Integer id;
+    private String username;
+    private String nome;
+    private String cognome;
     private String email;
     private String password;
+    private String foto;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    @OneToMany(mappedBy = "dipendente")
+    private List<Dispositivo> dispositivi;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

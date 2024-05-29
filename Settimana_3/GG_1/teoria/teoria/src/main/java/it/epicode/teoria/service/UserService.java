@@ -1,10 +1,12 @@
 package it.epicode.teoria.service;
 
 import it.epicode.teoria.DTO.UserDTO;
+import it.epicode.teoria.entity.Role;
 import it.epicode.teoria.entity.User;
 import it.epicode.teoria.exception.UserNotFoundException;
 import it.epicode.teoria.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +17,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public String saveUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());  // non lo avevamo prima
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userRepository.save(user);
         return "User with id: " + user.getId() + " saved";
     }
@@ -40,7 +46,7 @@ public class UserService {
             user.setName(userDTO.getName());
             user.setSurname(userDTO.getSurname());
             user.setEmail(userDTO.getEmail());
-            user.setPassword(userDTO.getPassword());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             return userRepository.save(user);
         }else{
             throw new UserNotFoundException("User with id:" + id + " not found");

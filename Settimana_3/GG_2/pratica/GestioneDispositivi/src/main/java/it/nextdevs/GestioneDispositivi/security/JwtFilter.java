@@ -1,9 +1,9 @@
-package it.epicode.teoria.security;
+package it.nextdevs.GestioneDispositivi.security;
 
-import it.epicode.teoria.entity.User;
-import it.epicode.teoria.exception.UnauthorizedException;
-import it.epicode.teoria.exception.UserNotFoundException;
-import it.epicode.teoria.service.UserService;
+import it.nextdevs.GestioneDispositivi.exception.DipendenteNonTrovatoException;
+import it.nextdevs.GestioneDispositivi.exception.UnauthorizedException;
+import it.nextdevs.GestioneDispositivi.model.Dipendente;
+import it.nextdevs.GestioneDispositivi.service.DipendenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,39 +22,39 @@ import java.util.Optional;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     @Autowired
-    private JwtTool jwtTool;
-
+    private  JwtTool jwtTool;
     @Autowired
-    private UserService userService;
+    private DipendenteService dipendenteService;
 
-    @Override //metodo per verificare che nella richiesta ci sia il token, altrimenti non si è autorizzati
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
+        String authHeader= request.getHeader("Authorization");
 
-        if(authHeader==null || !authHeader.startsWith("Bearer ")){
-            throw  new UnauthorizedException("Error in authorization, token missing!");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new DipendenteNonTrovatoException("Error in authorization,token missing!");
         }
-
         String token = authHeader.substring(7);
 
         jwtTool.verifyToken(token);
 
-        //decodifichiamo il token
-        int userId = jwtTool.getIdFromToken(token);
+        int dipendenteId= jwtTool.getIdFromToken(token);
 
-        Optional<User> userOptional = userService.getUserById(userId);
+        Optional<Dipendente> dipendenteOptional = dipendenteService.getDipendentiById(dipendenteId);
 
-        if (userOptional.isPresent()){
-            User user = userOptional.get();
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        if (dipendenteOptional.isPresent()){
+            Dipendente dipendente = dipendenteOptional.get();
+            Authentication authentication= new UsernamePasswordAuthenticationToken(dipendente,null, dipendente.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else{
-            throw new UserNotFoundException("Error in authorization, user with id " + userId + " not found!");
+            throw new UnauthorizedException("Dipendente not found! Re-login please");
         }
+        filterChain.doFilter(request, response);
     }
 
-    @Override //permette di non effettuare l'autenticazione per usare i servizi di autenticazione
+    @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+
         return new AntPathMatcher().match("/auth/**", request.getServletPath());
     }
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a172eb8f-bdbb-46d3-ba3e-8890dce561af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/DTO/StudentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/controller/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/entity/Error.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/entity/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/exception/CentralizedExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/exception/StudentNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/repository/StudentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/service/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../GG_2/pratica/GestioneDispositivi/src/main/java/it/nextdevs/GestioneDispositivi/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../GG_2/pratica/GestioneDispositivi/src/main/java/it/nextdevs/GestioneDispositivi/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/JwtTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/security/JwtTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../teoria/src/main/java/it/epicode/teoria/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../u5w7d1teoria-master/.idea/workspace.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vitod-ag&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vitod-ag/UNIT-5.git&quot;,
+    &quot;accountId&quot;: &quot;c7287bad-dcda-4e91-bdc0-cc7dc49c4087&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2h8EPfWeOWoFnMdHvL9Kb0bshSU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/vitod/OneDrive/Desktop/Epicode/Unit/UNIT-5/Settimana_3/GG_3/teoria/teoria_patternDesign",
+    "onboarding.tips.debug.path": "C:/Users/vitod/OneDrive/Desktop/Epicode/Unit/UNIT-5/Settimana_3/GG_1/teoria/teoria_patternDesign/src/main/java/org/example/Main.java"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a172eb8f-bdbb-46d3-ba3e-8890dce561af" name="Changes" comment="" />
+      <created>1716967292009</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716967292009</updated>
+    </task>
+    <servers />
+  </component>
+</project>
