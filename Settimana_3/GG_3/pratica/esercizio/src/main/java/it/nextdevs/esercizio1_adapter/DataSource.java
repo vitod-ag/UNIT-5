@@ -1,4 +1,4 @@
-package it.nextdevs.esercizio1;
+package it.nextdevs.esercizio1_adapter;
 
 public interface DataSource {
     public String getNomeCompleto();
