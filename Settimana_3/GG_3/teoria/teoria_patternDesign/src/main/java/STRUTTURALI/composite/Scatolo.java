@@ -1,4 +1,4 @@
-package STRUTTURALI.adapter.composite;
+package STRUTTURALI.composite;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package STRUTTURALI.adapter.composite;
+package STRUTTURALI.composite;
 
 public interface Prodotto {
     public String getNome();

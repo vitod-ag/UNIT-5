@@ -1,4 +1,4 @@
-package CREAZIONALI.factoryMethod.singleton;
+package CREAZIONALI.singleton;
 
 import java.time.LocalDate;
 
