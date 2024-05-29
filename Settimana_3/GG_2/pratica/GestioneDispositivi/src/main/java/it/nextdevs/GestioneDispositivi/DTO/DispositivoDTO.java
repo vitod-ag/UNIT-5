@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 public class DispositivoDTO {
-    @NotBlank(message = "Il nome/modello è obbligatorio")
+    @NotNull(message = "Il nome/modello è obbligatorio")
     private String nomeModello;
-    @NotBlank(message = "La marca è obbligatoria")
+    @NotNull(message = "La marca è obbligatoria")
     private String marca;
     @NotNull(message = "Lo stato è obbligatorio")
     private Status stato;

@@ -29,10 +29,10 @@ public class Config {
         //permette l'accesso a tutti dei servizi con endpoint /api/users e metodi get (naturalmente dopo l'autenticazione)
 //        httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET,"/api/users").permitAll());
 //        httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.POST,"/auth/").permitAll());
-        httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/").permitAll());
+        httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/**").permitAll());
 
         //nega l'accesso a qualsiasi servizio che non sia get e path /api/users
-        httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/").denyAll());
+//        httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/").denyAll());
         return httpSecurity.build();
     }
     @Bean
